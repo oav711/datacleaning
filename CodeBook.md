@@ -1,11 +1,11 @@
 # CodeBook
 
 Dataset: [Human Activity Recognition Using Smartphones](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
-===================
+-----------
 
 
 # Raw data
-============
+----------
 
 Human Activity Recognition database built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
 
@@ -33,7 +33,7 @@ All data are normalised and the units cancel.
 
 
 # Processed data
-===================
+----------------
 
 We added two column to the test set ('test/X_test.txt'): first - 'Subject' - subject label from file 'subject_test.txt' and second - 'Activity' - test activity label from file 'test/y_test.txt', and named this dataset 'TEST'.
 
