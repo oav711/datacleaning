@@ -1,7 +1,14 @@
 # --- PREPARING ---
 library(plyr)
 #path to data set
-path_project <- "/home/alex/Downloads/Getting and Cleaning Data/CourseProject/datacleaning/"
+path_project <- ""
+if (!file.exists("UCI HAR Dataset")){
+    path_project <- "/home/alex/Downloads/Getting and Cleaning Data/CourseProject/datacleaning/"
+    if (!file.exists(paste(path_project, "UCI HAR Dataset", sep=""))){
+        print("And I didn't find raw data set in in current directory and in your 'path_project' directory!")
+        stop("Please, check variable path 'path_project' in this script.")
+    }
+}
 #read the names of features
 name_feat <- read.table(paste(path_project, "UCI HAR Dataset/features.txt", sep=""), stringsAsFactors=FALSE)
 #column numbers and names of dirty data sets containing mean and standart deviation of measurements
@@ -40,6 +47,12 @@ for (i in 1:6) {RES[,2]<-gsub(i,name_act[i,2],RES[,2])}
 #assign names for column
 names(RES)[1:2] <- c("Subject", "Activity")
 names(RES)[3:ncol(RES)] <- extract_feat[,2]
+#transforming column names
+names(RES) <- gsub("[()]", "", names(RES))
+names(RES) <- gsub("mean", "Mean", names(RES))
+names(RES) <- gsub("std", "Std", names(RES))
+names(RES) <- gsub("^t", "time", names(RES))
+names(RES) <- gsub("^f", "freq", names(RES))
 
 # --- STEP 5 ---
 RES_AVG <- ddply(RES, .(Subject, Activity), numcolwise(mean))
